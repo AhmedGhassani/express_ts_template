@@ -8,6 +8,7 @@ const updatePasswordSchema = z.object({
     .refine((password) => /[A-Z]/.test(password), {
       message: 'Password must include at least one uppercase character',
     })
+    // eslint-disable-next-line no-useless-escape
     .refine((password) => /[!@#$%^&*()_+{}\[\]:;<>,.?~\\-]/.test(password), {
       message: 'Password must include at least one special character',
     }),
@@ -25,7 +26,7 @@ export const validateUpdatePasswordBody = (
     if (req.body.password !== req.body.passwordConfirmation) {
       res.status(400).json({
         message: 'Invalid request body',
-        details: "Passwords don't match",
+        details: 'Passwords don\'t match',
       });
     }
 

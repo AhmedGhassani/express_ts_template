@@ -11,6 +11,7 @@ const userSchema = z.object({
     .refine((password) => /[A-Z]/.test(password), {
       message: 'Password must include at least one uppercase character',
     })
+    // eslint-disable-next-line no-useless-escape
     .refine((password) => /[!@#$%^&*()_+{}\[\]:;<>,.?~\\-]/.test(password), {
       message: 'Password must include at least one special character',
     }),
