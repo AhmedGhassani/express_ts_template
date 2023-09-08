@@ -6,6 +6,8 @@
   "scripts": {
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
+    "prisma:migrate": "npx prisma migrate dev",
+    "prisma:generate": "npx prisma generate",
     "build": "tsc",
     "dev": "tsc-watch --onSuccess \"node dist/index.js\""
   },
@@ -13,6 +15,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@prisma/client": "^5.2.0",
     "axios": "^1.5.0",
     "bcrypt": "^5.1.1",
     "dotenv": "^16.3.1",
@@ -32,6 +35,7 @@
     "eslint-plugin-n": "^16.0.2",
     "eslint-plugin-promise": "^6.1.1",
     "prettier": "^3.0.3",
+    "prisma": "^5.2.0",
     "tsc-watch": "^6.0.4",
     "typescript": "^5.2.2"
   }
