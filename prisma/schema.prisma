@@ -11,11 +11,22 @@ datasource db {
 }
 
 model User {
-  id        String   @id @default(uuid())
-  email     String   @unique
+  id        String     @id @default(uuid())
+  email     String     @unique
   password  String
   firstName String
   lastName  String
+  createdAt DateTime   @default(now())
+  updatedAt DateTime   @updatedAt
+  JwtToken  JwtToken[]
+}
+
+model JwtToken {
+  id        String   @id @default(uuid())
+  token     String   @unique
+  user      User     @relation(fields: [userId], references: [id])
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+
+  userId String
 }
