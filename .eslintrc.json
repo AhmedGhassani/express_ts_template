@@ -5,7 +5,8 @@
     },
     "extends": [
         "eslint:recommended",
-        "plugin:@typescript-eslint/recommended"
+        "plugin:@typescript-eslint/recommended",
+        "prettier"
     ],
     "parser": "@typescript-eslint/parser",
     "parserOptions": {
@@ -16,7 +17,12 @@
     ],
     "rules": {
         "indent": ["error", 2],
-        "quotes": ["error", "double"] // Enforce single quotes
+        "quotes": ["error", "double"],
+        "eol-last": ["error", "always"],
+        "semi": ["error", "always"],
+        "camelcase": "error",
+        "no-unused-vars": "error",
+        "init-declarations": 2
     },
     "ignorePatterns": ["dist/"]
 }
