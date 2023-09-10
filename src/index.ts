@@ -13,16 +13,21 @@ app.get('/', (req: Request, res: Response) => {
   res.status(200).send('App is Healthy');
 });
 
+// Add Routes Here
+
 app.use('/users', userRouter);
 
+// Don't Add Routes Below
+
+// Handle 404 Errors
 app.use((req: Request, res: Response, next: NextFunction) => {
   res.status(404).json({ message: `Path ${req.url} Not Found` });
 });
 
+// Handle Uncaught Internal Server Errors
 app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
   console.error(err.stack);
 
-  // You can customize the error response as needed
   res.status(500).json({ error: 'Something went wrong' });
 });
 
