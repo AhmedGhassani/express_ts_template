@@ -1,14 +1,11 @@
-import jwt, { JwtPayload } from 'jsonwebtoken';
+import jwt from 'jsonwebtoken';
 import { Request, Response, NextFunction } from 'express';
 import prisma from '../../db/prisma';
-interface verifyRequest extends Request {
-  user?: string | JwtPayload;
-}
 
 const secretKey = process.env.JWT_SECRET_KEY || '';
 
 export const verifyToken = async (
-  req: verifyRequest,
+  req: Request,
   res: Response,
   next: NextFunction,
 ) => {
@@ -27,7 +24,7 @@ export const verifyToken = async (
 
     const decoded = jwt.verify(token, secretKey);
 
-    req.user = decoded;
+    req.body.user = decoded;
 
     next();
   } catch (error) {

@@ -103,8 +103,10 @@ userRouter.post(
         .status(200)
         .json({ message: 'Password Updated Successfully', data: { token } });
     } catch (error) {
-      console.error('Login error:', error);
-      res.status(500).json({ message: 'Oops! Something went wrong' });
+      res.status(500).json({
+        message: 'Oops! Something went wrong',
+        error,
+      });
     }
   },
 );
