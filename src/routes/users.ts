@@ -83,21 +83,21 @@ userRouter.post(
   validateUpdatePasswordBody,
   async (req: Request, res: Response) => {
     try {
-      const { password } = req.body;
+      const { password, user } = req.body;
 
       const hashedPassword = await bcrypt.hash(password, 10);
 
       await prisma.user.update({
         where: {
-          id: req.user.id,
+          id: user.id,
         },
         data: {
           password: hashedPassword,
         },
       });
 
-      await deleteToken(req.user.id);
-      const token = await generateToken(req.user.id);
+      await deleteToken(user.id);
+      const token = await generateToken(user.id);
 
       res
         .status(200)
