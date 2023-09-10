@@ -1,4 +1,4 @@
-import express, { Request, Response, json } from 'express';
+import express, { Request, Response, NextFunction, json } from 'express';
 import dotenv from 'dotenv';
 import userRouter from './routes/users';
 
@@ -14,6 +14,17 @@ app.get('/', (req: Request, res: Response) => {
 });
 
 app.use('/users', userRouter);
+
+app.use((req: Request, res: Response, next: NextFunction) => {
+  res.status(404).json({ message: `Path ${req.url} Not Found` });
+});
+
+app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
+  console.error(err.stack);
+
+  // You can customize the error response as needed
+  res.status(500).json({ error: 'Something went wrong' });
+});
 
 app.listen(port, () => {
   console.log(`Server is listening on ${port}`);
